@@ -11,7 +11,7 @@
           <span class="prompt-box-text-content">开启前置摄像头开始录制</span>
           <span class="prompt-box-text-border"></span>
         </div>
-        <div class="prompt-box-text">
+        <div class="prompt-box-text" style="margin-bottom: 0">
           <span class="prompt-box-text-number">2</span>
           <span class="prompt-box-text-content">完成录制，等待验证结果</span>
         </div>
@@ -58,7 +58,10 @@ export default {
     padding-bottom: 12px;
 
     .prompt-box {
-      padding: 4rem 0;
+      padding: 3.5rem 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       .prompt-box-text {
         margin: 0 auto 2.666rem;
@@ -88,7 +91,6 @@ export default {
         .prompt-box-text-content {
           color: #333;
           letter-spacing: 0;
-          white-space: nowrap;
           display: inline-block;
           font-size: 1.333rem;
         }
@@ -104,7 +106,7 @@ export default {
     }
 
     .prompt-next {
-      margin: 0 auto;
+      margin: 0 0.75rem;
       height: 4.083rem;
       line-height: 4.083rem;
       text-align: center;
@@ -114,7 +116,7 @@ export default {
       border-radius: 4px;
       color: #fff;
       display: block;
-      width: 20rem;
+      width: ;
       font-size: 16px;
       outline: none;
       border: none;

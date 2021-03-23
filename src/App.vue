@@ -13,6 +13,8 @@ body {
   background: rgb(244 244 244);
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
