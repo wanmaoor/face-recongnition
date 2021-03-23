@@ -16,6 +16,7 @@
           <span class="prompt-box-text-content">完成录制，等待验证结果</span>
         </div>
       </div>
+      <div class="prompt-next">下一步</div>
     </div>
   </div>
 </template>
@@ -100,6 +101,23 @@ export default {
           display: block;
         }
       }
+    }
+
+    .prompt-next {
+      margin: 0 auto;
+      height: 4.083rem;
+      line-height: 4.083rem;
+      text-align: center;
+      background: #0073eb;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      color: #fff;
+      display: block;
+      width: 28.75rem;
+      font-size: 16px;
+      outline: none;
+      border: none;
     }
   }
 }
