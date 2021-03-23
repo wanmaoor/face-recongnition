@@ -1,5 +1,17 @@
 <template>
   <div class="home">
+    <div class="setting">
+      <Popover
+        v-model="showPopover"
+        trigger="click"
+        :actions="actions"
+        placement="bottom-end"
+      >
+        <template #reference>
+          <Button type="info" size="small">浅色风格</Button>
+        </template>
+      </Popover>
+    </div>
     <div class="sketch">
       <div class="sketch-img"></div>
       <p class="sketch-text">正面平视手机、保证光线充足<br />请勿遮挡面部</p>
@@ -23,10 +35,16 @@
 
 <script>
 // @ is an alias to /src
-
+import { Button, Popover } from "vant";
 export default {
   name: "Home",
-  components: {},
+  components: { Button, Popover },
+  data() {
+    return {
+      showPopover: false,
+      actions: [{ text: "读数模式" }, { text: "非读数模式" }],
+    };
+  },
 };
 </script>
 
@@ -116,11 +134,16 @@ export default {
       border-radius: 4px;
       color: #fff;
       display: block;
-      width: ;
       font-size: 16px;
       outline: none;
       border: none;
     }
+  }
+
+  .setting {
+    position: absolute;
+    top: 6px;
+    right: 6px;
   }
 }
 </style>
