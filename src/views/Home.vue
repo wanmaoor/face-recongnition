@@ -114,7 +114,7 @@ export default {
       border-radius: 4px;
       color: #fff;
       display: block;
-      width: 28.75rem;
+      width: 20rem;
       font-size: 16px;
       outline: none;
       border: none;
