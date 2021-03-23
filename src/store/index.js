@@ -4,8 +4,14 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    countingMode: "读数模式",
+  },
+  mutations: {
+    change_mode: (state, payload) => {
+      state.countingMode = payload;
+    },
+  },
   actions: {},
   modules: {},
 });

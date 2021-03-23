@@ -6,9 +6,10 @@
         trigger="click"
         :actions="actions"
         placement="bottom-end"
+        @select="handleSelect"
       >
         <template #reference>
-          <Button type="info" size="small">浅色风格</Button>
+          <Button type="info" size="small">{{ mode }}</Button>
         </template>
       </Popover>
     </div>
@@ -36,6 +37,7 @@
 <script>
 // @ is an alias to /src
 import { Button, Popover } from "vant";
+import store from "@/store";
 export default {
   name: "Home",
   components: { Button, Popover },
@@ -44,6 +46,16 @@ export default {
       showPopover: false,
       actions: [{ text: "读数模式" }, { text: "非读数模式" }],
     };
+  },
+  methods: {
+    handleSelect(val) {
+      store.commit("change_mode", val.text);
+    },
+  },
+  computed: {
+    mode() {
+      return this.$store.state.countingMode;
+    },
   },
 };
 </script>
