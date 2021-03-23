@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    countingMode: "读数模式",
+    countingMode: "非读数模式",
   },
   mutations: {
     change_mode: (state, payload) => {

@@ -29,8 +29,18 @@
           <span class="prompt-box-text-content">完成录制，等待验证结果</span>
         </div>
       </div>
-      <div class="prompt-next">下一步</div>
+      <div class="prompt-next">
+        <label for="take-video" class="custom-file-upload"> 下一步 </label>
+        <input
+          type="file"
+          accept="video/*"
+          id="take-video"
+          capture="camcorder"
+          class="video"
+        />
+      </div>
     </div>
+    <div id="video-show"></div>
   </div>
 </template>
 
@@ -57,10 +67,38 @@ export default {
       return this.$store.state.countingMode;
     },
   },
+  mounted() {
+    const input = document.getElementById("take-video");
+    const container = document.getElementById("video-show");
+    input.onchange = function (event) {
+      const files = event.target.files;
+      if (files && files.length > 0) {
+        let file = files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener("loadend", function () {
+          const video = document.createElement("video");
+          video.src = reader.result;
+          video.setAttribute("controls", "controls");
+          container.appendChild(video);
+        });
+      } else {
+        alert("请重新上传视频");
+      }
+    };
+  },
 };
 </script>
 
 <style lang="less">
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  width: 100%;
+  display: inline-block;
+  cursor: pointer;
+}
 .home {
   .sketch {
     background: hsla(0, 0%, 88%, 0.35);
