@@ -29,7 +29,7 @@
           <span class="prompt-box-text-content">完成录制，等待验证结果</span>
         </div>
       </div>
-      <div class="prompt-next">
+      <div class="prompt-next" v-if="mode === '非读数模式'">
         <label for="take-video" class="custom-file-upload"> 下一步 </label>
         <input
           type="file"
@@ -39,8 +39,8 @@
           class="video"
         />
       </div>
+      <div class="prompt-next" v-else>下一步</div>
     </div>
-    <div id="video-show"></div>
   </div>
 </template>
 
@@ -69,18 +69,22 @@ export default {
   },
   mounted() {
     const input = document.getElementById("take-video");
-    const container = document.getElementById("video-show");
-    input.onchange = function (event) {
+    input.onchange = (event) => {
       const files = event.target.files;
       if (files && files.length > 0) {
         let file = files[0];
         let reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.addEventListener("loadend", function () {
-          const video = document.createElement("video");
-          video.src = reader.result;
-          video.setAttribute("controls", "controls");
-          container.appendChild(video);
+        reader.addEventListener("loadend", () => {
+          this.$router.push({
+            path: "/result",
+            name: "Result",
+            params: { src: reader.result },
+          });
+          // const video = document.createElement("video");
+          // video.src = reader.result;
+          // video.setAttribute("controls", "controls");
+          // container.appendChild(video);
         });
       } else {
         alert("请重新上传视频");
