@@ -7,13 +7,38 @@
         <span class="result-box-pic-icon icon-bottom"></span>
         <span class="result-box-pic-icon icon-left"></span>
         <img
+          v-if="isMatch"
+          src="../assets/1.png"
+          class="result-box-return-img"
+          alt="img"
+        />
+        <img
+          v-else
           src="../assets/pic_default.png"
           class="result-box-return-img"
           alt="default_img"
         />
       </span>
-      <span class="result-box-text"></span>
-      <div class="result-box-value"></div>
+      <div class="result-box-text">
+        <span>检测结果：</span>
+        <span class="value">
+          <span style="color: green" v-if="isMatch">匹配成功</span>
+          <span style="color: red" v-else>匹配失败</span>
+        </span>
+      </div>
+
+      <div class="block">
+        <label>姓名：</label>
+        <span class="value">{{ name }}</span>
+      </div>
+      <div class="block">
+        <label>匹配度：</label>
+        <span class="value">{{ score }}</span>
+      </div>
+      <div class="block">
+        <label>耗时：</label>
+        <span class="value">{{ time }}</span>
+      </div>
     </div>
     <div class="result-option">
       <Button
@@ -23,7 +48,6 @@
         @click.native="$router.push('/')"
         >完成</Button
       >
-      <Button type="info" plain :block="true" class="button">重拍</Button>
     </div>
   </div>
 </template>
@@ -32,13 +56,26 @@
 import { Button } from "vant";
 export default {
   components: { Button },
-  mounted() {
-    console.log(this.$route.params);
+  created() {
+    if (!this.data) {
+      this.$router.push("/");
+    }
   },
-
   computed: {
-    src() {
-      return this.$route.params.src;
+    isMatch() {
+      return this.data.ismatch;
+    },
+    score() {
+      return (this.data.score * 100).toFixed(2) + "%";
+    },
+    time() {
+      return this.data.timeused / 1000 + "秒";
+    },
+    name() {
+      return this.data.name;
+    },
+    data() {
+      return this.$route.params.data;
     },
   },
 };
@@ -59,7 +96,27 @@ export default {
     -moz-box-shadow: 0 -4px 10px 0 #e8e8e8;
     box-shadow: 0 -4px 10px 0 #e8e8e8;
     padding: 2rem;
-    margin-bottom: 1.25rem;
+    margin: 0 auto 1.25rem auto;
+
+    .block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4px 0;
+      color: rgb(156, 156, 156);
+
+      label {
+        display: inline-block;
+        width: 140px;
+        text-align: right;
+      }
+
+      .value {
+        display: inline-block;
+        width: 120px;
+        text-align: left;
+      }
+    }
 
     .result-box-pic {
       display: block;
@@ -118,26 +175,18 @@ export default {
     }
 
     .result-box-text {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       color: #00002d;
       display: block;
       text-align: center;
       height: 4rem;
-      margin-bottom: 3.542rem;
+      line-height: 4rem;
     }
   }
   .result-option {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    .button:first-child {
-      margin-right: 4px;
-    }
-
-    .button:last-child {
-      margin-left: 4px;
-    }
   }
 }
 </style>
